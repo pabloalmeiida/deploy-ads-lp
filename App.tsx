@@ -117,7 +117,10 @@ export default function App() {
                   <img 
                     key={i} 
                     src={src} 
-                    alt="User" 
+                    alt="User"
+                    loading="lazy"
+                    width="36"
+                    height="36" 
                     className="w-9 h-9 rounded-full border-2 border-slate-900 object-cover"
                   />
                 ))}
@@ -395,7 +398,7 @@ export default function App() {
                 </ul>
                 <div className="border-t border-red-900/20 pt-4">
                    <div className="text-xs text-red-400 font-medium uppercase">Custo Médio</div>
-                   <div className="text-xl font-bold text-white">R$ 1.500 <span className="text-sm font-normal text-slate-500">/mês</span></div>
+                   <div className="text-xl font-bold text-white">R$ 2.000 <span className="text-sm font-normal text-slate-500">/mês</span></div>
                 </div>
               </div>
 
@@ -442,9 +445,12 @@ export default function App() {
            <div className="max-w-lg mx-auto">
              
              {/* Anchor Pricing Label with Padding */}
-             <div className="text-center py-8 my-4">
+             <div className="text-center py-8 my-4 space-y-2">
                 <p className="text-slate-400 text-sm">
                   Valor real de mercado (Dev + Servidor + Configuração): <span className="line-through text-slate-500 font-medium">R$ 3.250,00</span>
+                </p>
+                <p className="text-slate-400 text-sm">
+                  Salário real de gestor (Salário + Encargos + Benefícios): <span className="line-through text-slate-500 font-medium">R$ 2.500,00</span>
                 </p>
              </div>
 
@@ -532,7 +538,10 @@ export default function App() {
                 <div className="w-40 h-40 md:w-56 md:h-56 rounded-2xl bg-slate-800 border-4 border-slate-700 shrink-0 overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-all duration-500">
                   <img 
                     src="https://i.ibb.co/6J8ZB6vT/file.jpg" 
-                    alt="Pablo Almeida" 
+                    alt="Pablo Almeida"
+                    loading="lazy"
+                    width="224"
+                    height="224" 
                     className="w-full h-full object-cover"
                   />
                 </div>
