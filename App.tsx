@@ -469,11 +469,11 @@ export default function App() {
                     <div className="flex items-center justify-center gap-3 mb-2">
                       <span className="text-slate-400 font-medium text-xl mt-4">12x de</span>
                       <span className="text-[4.5rem] leading-none font-extrabold text-white tracking-tighter">
-                        51,40
+                        206,54
                       </span>
                     </div>
                     <div className="text-brand-300 font-medium text-base bg-brand-900/20 border border-brand-500/20 inline-block px-4 py-1 rounded-full">
-                      Pagamento Único de R$ 497,00
+                      Pagamento Único de R$ 1997,00
                     </div>
                   </div>
 
