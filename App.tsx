@@ -33,17 +33,15 @@ import { CheckoutForm } from './components/forms/CheckoutForm';
 
 export default function App() {
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<'full' | 'template'>('full');
   
   const scrollToPrice = () => {
     document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const openCheckout = () => {
+  const openCheckout = (product: 'full' | 'template') => {
+    setSelectedProduct(product);
     setIsCheckoutModalOpen(true);
-  };
-
-  const openTemplateCheckout = () => {
-    window.location.href = "https://pay.hotmart.com/G103656803D?checkoutMode=10";
   };
 
   return (
@@ -53,9 +51,9 @@ export default function App() {
       <Modal 
         isOpen={isCheckoutModalOpen} 
         onClose={() => setIsCheckoutModalOpen(false)}
-        title="Finalizar Inscrição"
+        title={selectedProduct === 'full' ? "Finalizar Inscrição Completa" : "Adquirir Template"}
       >
-        <CheckoutForm />
+        <CheckoutForm productType={selectedProduct} />
       </Modal>
 
       {/* Navigation / Header */}
@@ -496,7 +494,7 @@ export default function App() {
                      </li>
                   </div>
 
-                  <Button variant="outline" fullWidth onClick={openTemplateCheckout} withIcon={false} className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white hover:border-slate-600">
+                  <Button variant="outline" fullWidth onClick={() => openCheckout('template')} withIcon={false} className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white hover:border-slate-600">
                     COMPRAR SÓ O TEMPLATE
                   </Button>
                </div>
@@ -570,7 +568,7 @@ export default function App() {
                   </div>
 
                   <div>
-                    <Button fullWidth onClick={openCheckout} className="text-lg py-5 group-hover:shadow-brand-500/50 bg-gradient-to-r from-brand-600 to-blue-500">
+                    <Button fullWidth onClick={() => openCheckout('full')} className="text-lg py-5 group-hover:shadow-brand-500/50 bg-gradient-to-r from-brand-600 to-blue-500">
                       QUERO TUDO PRONTO
                     </Button>
                     
