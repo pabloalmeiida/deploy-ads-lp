@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/Button';
 import { Lock, Loader2 } from 'lucide-react';
 
-export const CheckoutForm: React.FC = () => {
+interface CheckoutFormProps {
+  productType: 'full' | 'template';
+}
+
+export const CheckoutForm: React.FC<CheckoutFormProps> = ({ productType }) => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -84,6 +88,7 @@ export const CheckoutForm: React.FC = () => {
     // Cria o payload específico para o Webhook com os dados extras
     const webhookPayload = {
       ...formData,
+      product_interest: productType, // Identifica qual produto o lead clicou
       submitted_at: now.toISOString(), // Ex: "2023-10-27T10:00:00.000Z" (Padrão ISO)
       timestamp: now.getTime()         // Ex: 1698400800000 (Numérico/Unix)
     };
@@ -101,7 +106,8 @@ export const CheckoutForm: React.FC = () => {
         },
         'leadName': formData.name,
         'leadEmail': formData.email,
-        'leadPhone': formData.phone
+        'leadPhone': formData.phone,
+        'productInterest': productType
       });
     } catch (err) {
       console.error("Erro ao enviar para DataLayer:", err);
@@ -118,8 +124,13 @@ export const CheckoutForm: React.FC = () => {
         body: JSON.stringify(webhookPayload) // <--- Alterado aqui
       }).catch(err => console.error("Webhook error (might be CORS, ignoring):", err));
       
-      // 2. Construct Hotmart URL
-      const baseUrl = "https://pay.hotmart.com/R103595301V";
+      // 2. Construct Hotmart URL based on Product Type
+      // Full Solution: R103595301V
+      // Template Only: G103656803D
+      const baseUrl = productType === 'template' 
+        ? "https://pay.hotmart.com/G103656803D"
+        : "https://pay.hotmart.com/R103595301V";
+
       const redirectParams = new URLSearchParams();
       
       // Add default Hotmart param
